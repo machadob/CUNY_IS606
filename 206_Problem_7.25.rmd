@@ -108,7 +108,7 @@ Substituting distance = 103 miles in the above formula, we get: travel_time = b0
 
 **Solution:**
 
-In part (d) we found using the regression that it takes `r travel_time` minutes to travel from Santa Barbara to Los Angeles. If the actual time required is 168 minutes then the residual value is 168 - `r travel_time` = `r 168 - travel_time` Minutes.
+In part (d) we found using the regression that it takes `r travel_time` minutes to travel from Santa Barbara to Los Angeles. If the actual time required is 168 minutes then the residual value is 168 - `r travel_time` = **`r 168 - travel_time`** Minutes.
 
 ```{r echo=FALSE}
 residual <- 168 - travel_time
