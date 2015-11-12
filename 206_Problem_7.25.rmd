@@ -13,11 +13,18 @@ library(ggplot2)
 
 **_____________________________________________________________________________________________________**
 
+The explanatory variable is ***distance*** and the response variable is ***travel time.***
+
+**_____________________________________________________________________________________________________**
+
 **Part a:** *Write the equation of the regression line for predicting travel time.*
 
 **Solution:**
 
 Given: *$\quad R=0.636,\quad { S }_{ x }=99,\quad { S }_{ y }=113$*
+
+Where R is the correlation between the two variables, and ${ S }_{ x }\quad and \quad{ S }_{ y }$ are the sample
+standard deviations of the distance and travel time, respectively.
 
 The slope of the regression line, b1, is given by :  *$R\times ({ S }_{ y }\div { S }_{ x })$* 
 
@@ -60,9 +67,9 @@ The equation of the line is :
 **Part b:** *Interpret the slope and the intercept in this context.*
 
 **Solution:**
-The slope of the line predicts that it will require `r b1`  for each mile travelled.
+The slope of the line predicts that it will require `r b1` minutes for each mile travelled.
 
-The intercept of the line b0=`r b0` can be seen as the time when the distnace is zero. It does not make much sense in this context because we cannot travel zero distance in `r b0` minutes, but we could interpret it as the wait time after which we started caculating the distance travelled.
+The intercept of the line b0=`r b0` can be seen as the time when the distnace is zero. It does not make much sense in this context because we cannot travel zero distance in `r b0` minutes, but we could interpret it as the wait time after which we start travelling and caculating the distance travelled and the additional time required per mile.
 
 **_____________________________________________________________________________________________________**
 
@@ -123,6 +130,6 @@ if( residual > 0){
 
 **Solution:**
 
-***No, it would not be appropriate to use the linear model to predict the travel time from Los Angeles to a point 500 miles away since it is way out of the range of distance we could consider, so it is a extrapolation. 500 miles is `r round((500-Mx)/Sx,1)` standard deviations from the mean which is very far from the normal range of values.***
+***No, it would not be appropriate to use the linear model to predict the travel time from Los Angeles to a point 500 miles away since it is way out of the range of distance we could consider, so it is an extrapolation. Also,  500 miles is `r round((500-Mx)/Sx,1)` standard deviations from the mean which is very far from the normal range of values.***
 
 **_____________________________________________________________________________________________________**
