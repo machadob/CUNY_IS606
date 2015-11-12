@@ -1,0 +1,128 @@
+---
+title: "Problem 7.25"
+author: "Burton Machado"
+date: "November 10, 2015"
+output: html_document
+---
+
+```{r echo=FALSE}
+library(ggplot2)
+```
+
+**Problem 7.25:** *The Coast Starlight, Part II. Exercise 7.13 introduces data on the Coast Starlight Amtrak train that runs from Seattle to Los Angeles. The mean travel time from one stop to the next on the Coast Starlight is 129 mins, with a standard deviation of 113 minutes. The mean distance traveled from one stop to the next is 108 miles with a standard deviation of 99 miles. The correlation between travel time and distance is 0.636.*
+
+**_____________________________________________________________________________________________________**
+
+**Part a:** *Write the equation of the regression line for predicting travel time.*
+
+**Solution:**
+
+Given: *$\quad R=0.636,\quad { S }_{ x }=99,\quad { S }_{ y }=113$*
+
+The slope of the regression line, b1, is given by :  *$R\times ({ S }_{ y }\div { S }_{ x })$* 
+
+
+```{r}
+R <- 0.636
+Sx <- 99
+Sy <- 113
+b1 <- round(R*(Sy/Sx),3)
+
+
+```
+
+Therefore the slope of the regression line ***b1 = `r b1`***
+
+The equation of the regression line is given by : $\quad \overset { \_  }{ y\quad  } =\quad { b }_{ 0 }+{ b }_{ 1 }\times \overset { \_  }{ x }$
+
+The regression line also has to pass through the two means. That is, it has to pass through point (108, 129). Substituting these values in the equation of the regression line we can get the value of the y-intercept. 
+
+```{r}
+Mx <- 108
+My <- 129
+b0 <- round(My -(b1*Mx), 3)
+```
+Therefore the y-intercept of the regression line ***b0 = `r b0`***
+
+```{r echo=FALSE}
+plot(c(0,100), c(0,100), type = "n", xlab="distance", ylab="travel time", asp = 1)
+text(0,10, paste("intercept is ", b0), col = "blue")#, adj = c(0, -.1))
+abline(a=b0, b=b1, col = "RED")
+```
+
+The equation of the line is : 
+
+***travel time = `r b0` + `r b1` $\times$ distance***
+
+**_____________________________________________________________________________________________________**
+
+
+**Part b:** *Interpret the slope and the intercept in this context.*
+
+**Solution:**
+The slope of the line predicts that it will require `r b1`  for each mile travelled.
+
+The intercept of the line b0=`r b0` can be seen as the time when the distnace is zero. It does not make much sense in this context because we cannot travel zero distance in `r b0` minutes, but we could interpret it as the wait time after which we started caculating the distance travelled.
+
+**_____________________________________________________________________________________________________**
+
+
+**Part c:** *Calculate ${ R }^{ 2 }$ of the regression line for predicting travel time from distance traveled for the Coast Starlight, and interpret ${ R }^{ 2 }$ in the context of the application.*
+
+**Solution:**
+```{r}
+R2 <- round(R**2,3)
+```
+
+***${ R }^{ 2 }$ = `r R2`***
+
+***This means that the model accounts for around `r R2*100` % variability in travel time.***
+
+**_____________________________________________________________________________________________________**
+
+
+**Part d:** *The distance between Santa Barbara and Los Angeles is 103 miles. Use the model to estimate the time it takes for the Starlight to travel between these two cities.*
+
+**Solution:**
+
+We have , *travel time = `r b0` + `r b1` $\times$ distance*
+
+Given, distance = 103 miles.
+
+Substituting distance = 103 miles in the above formula, we get: travel_time = b0 + b1*103
+`r travel_time <- b0 + b1*103`
+
+***Therefore travel time between Santa Barbara and Los Angeles is : `r travel_time` minutes***
+
+**_____________________________________________________________________________________________________**
+
+
+**Part e:** *It actually takes the Coast Starlight about 168 mins to travel from Santa Barbara to Los Angeles. Calculate the residual and explain the meaning of this residual value.*
+
+**Solution:**
+
+In part (d) we found using the regression that it takes `r travel_time` minutes to travel from Santa Barbara to Los Angeles. If the actual time required is 168 minutes then the residual value is 168 - `r travel_time` = `r 168 - travel_time` Minutes.
+
+```{r echo=FALSE}
+residual <- 168 - travel_time
+
+if( residual > 0){
+  message <- "The residual is positive which means that the travel time is underestimated by the model"
+}else if ( residual < 0){
+  message <- "The residual is negetive which means that the travel time is overestimated by the model"
+}else{
+  message <- "The residual is zero which means that the travel time is exactly estimated by the model"
+}
+```
+***`r message`***
+
+**_____________________________________________________________________________________________________**
+
+
+**Part f:** *Suppose Amtrak is considering adding a stop to the Coast Starlight 500 miles away from Los Angeles. Would it be appropriate to use this linear model to predict the travel time from Los Angeles to this point?*
+
+**Solution:**
+
+***No, it would not be appropriate to use the linear model to predict the travel time from Los Angeles to a point 500 miles away since it is way out of the range of distance we could consider, so it is a extrapolation. 500 miles is `r round((500-Mx)/Sx,1)` standard deviations from the mean which is very far from the normal range of values.***
+
+**_____________________________________________________________________________________________________**
