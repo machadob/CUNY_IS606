@@ -13,7 +13,7 @@ library(ggplot2)
 
 **_____________________________________________________________________________________________________**
 
-The explanatory variable is ***distance*** and the response variable is ***travel time.***
+The explanatory variable is ***distance*** (between two stops) and the response variable is ***travel time*** (between two stops)
 
 **_____________________________________________________________________________________________________**
 
@@ -21,10 +21,9 @@ The explanatory variable is ***distance*** and the response variable is ***trave
 
 **Solution:**
 
-Given: *$\quad R=0.636,\quad { S }_{ x }=99,\quad { S }_{ y }=113$*
+***Given: $\quad R=0.636,\quad { S }_{ x }=99,\quad { S }_{ y }=113,\quad { M }_{ x }=108,\quad { M }_{ y }=129$***
 
-Where R is the correlation between the two variables, and ${ S }_{ x }\quad and \quad{ S }_{ y }$ are the sample
-standard deviations of the distance and travel time, respectively.
+Where $R$ is the correlation between the two variables, ${ S }_{ x }\quad and \quad{ S }_{ y }$ are the sample standard deviations of the distance and travel time between two train stops, respectively and , ${ M }_{ x }\quad and \quad{ M }_{ y }$ are the Means of the distance and travel time between two train stops, respectively.
 
 The slope of the regression line, b1, is given by :  *$R\times ({ S }_{ y }\div { S }_{ x })$* 
 
@@ -52,8 +51,8 @@ b0 <- round(My -(b1*Mx), 3)
 Therefore the y-intercept of the regression line ***b0 = `r b0`***
 
 ```{r echo=FALSE}
-plot(c(0,100), c(0,100), type = "n", xlab="distance", ylab="travel time", asp = 1)
-text(0,10, paste("intercept is ", b0), col = "blue")#, adj = c(0, -.1))
+plot(c(0,100), c(0,100), type = "n", xlab="distance", ylab="travel time")
+text(14,44, paste("intercept is ", b0), col = "blue")#, adj = c(0, -.1))
 abline(a=b0, b=b1, col = "RED")
 ```
 
@@ -67,9 +66,9 @@ The equation of the line is :
 **Part b:** *Interpret the slope and the intercept in this context.*
 
 **Solution:**
-The slope of the line predicts that it will require `r b1` minutes for each mile travelled.
+The slope of the line predicts that it will require `r b1` minutes for each additional mile travelled.
 
-The intercept of the line b0=`r b0` can be seen as the time when the distnace is zero. It does not make much sense in this context because we cannot travel zero distance in `r b0` minutes, but we could interpret it as the wait time after which we start travelling and caculating the distance travelled and the additional time required per mile.
+The intercept of the line b0=`r b0` can be seen as the time when the distance travelled is zero. It does not make much sense in this context because it seems we have travelled zero distance in `r b0` minutes, but we could interpret it as the wait time after which we start travelling and caculating the distance travelled and the additional time required per mile. Or, we could view the intercept value as the time it takes to walk to the train station before we board the train. So this is a fixed quantity that will be added to travel time. It all depends on the interpretation.
 
 **_____________________________________________________________________________________________________**
 
@@ -83,7 +82,7 @@ R2 <- round(R**2,3)
 
 ***${ R }^{ 2 }$ = `r R2`***
 
-***This means that the model accounts for around `r R2*100` % variability in travel time.***
+***This means that the model accounts for around `r R2*100` % variation in travel time.***
 
 **_____________________________________________________________________________________________________**
 
